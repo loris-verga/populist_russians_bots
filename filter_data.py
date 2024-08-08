@@ -141,3 +141,31 @@ def remove_links(input_file, output_file):
 
             # Write the rows with removed links
             writer.writerows(rows_with_removed_links)
+
+def convert_to_lowercase(input_file, output_file):
+    # Open the input file for reading
+    with open(input_file, 'r', newline='', encoding='utf-8') as infile:
+        reader = csv.reader(infile)
+        # Read the header
+        header = next(reader)
+        # Find the index of the text column
+        text_column_index = 1
+        # List to store rows with converted text to lowercase
+        rows_with_lowercase_text = []
+        # Process each row in the input file
+        for row in reader:
+            # Get the text from the text column
+            text = row[text_column_index]
+            # Convert the text to lowercase
+            lowercase_text = text.lower()
+            # Replace the text in the row with the lowercase text
+            row[text_column_index] = lowercase_text
+            # Append the modified row to the list
+            rows_with_lowercase_text.append(row)
+        # Write the changes to the output file
+        with open(output_file, 'w', newline='', encoding='utf-8') as outfile:
+            writer = csv.writer(outfile)
+            # Write the header
+            writer.writerow(header)
+            # Write the rows with converted text to lowercase
+            writer.writerows(rows_with_lowercase_text)
