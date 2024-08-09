@@ -1,12 +1,19 @@
 import csv
-import csv
-from datetime import datetime
-import csv
 from datetime import datetime
 import os
 
 
-def filter_csv(input_file, output_file, column_indices, target_column_index, target_value="English"):
+def filter_csv(input_file, output_file, column_indices, target_column_index, target_value):
+    """
+    This method is used to filter a csv file and to extract the values of some specified columns
+    :param input_file: The path of the input file
+    :param output_file: The path of the output file
+    :param column_indices: A set of indices that are the indices of the columns that we want to keep
+    :param target_column_index: The index of the column where the filter will be applied
+    :param target_value: The filter is defined with an equality with that value
+    :return: None, the result will be written in the output file
+    """
+
     # Open the input file for reading
     with open(input_file, 'r', newline='', encoding='utf-8') as infile:
         reader = csv.reader(infile)
@@ -15,6 +22,7 @@ def filter_csv(input_file, output_file, column_indices, target_column_index, tar
         header = next(reader)
 
         # Filter the header according to the column indices
+        # We only keep the columns specified in the dictionary of indices
         filtered_header = [header[i] for i in column_indices]
 
         # List to store filtered rows
@@ -27,7 +35,6 @@ def filter_csv(input_file, output_file, column_indices, target_column_index, tar
                 # Filter the row according to the column indices
                 filtered_row = [row[i] for i in column_indices]
                 filtered_rows.append(filtered_row)
-
 
     # Create the output file if it does not exist
     if not os.path.exists(output_file):
@@ -42,10 +49,6 @@ def filter_csv(input_file, output_file, column_indices, target_column_index, tar
 
         # Write the filtered rows
         writer.writerows(filtered_rows)
-
-
-# Define the set of column indices to keep
-column_indices = {1, 2, 5, 13}
 
 
 def extract_date_columns(input_file, output_file):
@@ -141,6 +144,7 @@ def remove_links(input_file, output_file):
 
             # Write the rows with removed links
             writer.writerows(rows_with_removed_links)
+
 
 def convert_to_lowercase(input_file, output_file):
     # Open the input file for reading
