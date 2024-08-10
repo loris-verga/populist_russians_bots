@@ -15,5 +15,3 @@ dic_rooduijn_pauwels = {"elit",
        "establishm",
        "ruling"}
 
-
-dic_

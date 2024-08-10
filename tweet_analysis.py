@@ -4,7 +4,7 @@ import datetime
 from constants import *
 
 
-def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_function=None):
+def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_function=None, category=None):
     """
     This function counts the number of tweets per day, optionally applying a filter to each tweet.
 
@@ -32,7 +32,11 @@ def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_functio
             if filter_function and not filter_function(row[1]):
                 continue
 
-            # Extract the year, month, and day from the row
+            # check if we need to filter with the type of troll and if yes, check if it is the right category of troll
+            if not (not category or (category and row[2] == category)):
+                continue
+
+                # Extract the year, month, and day from the row
             year = int(row[3])
             month = int(row[4])
             day = int(row[5])
@@ -52,7 +56,7 @@ def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_functio
     return tweet_count_per_day
 
 
-def _get_number_of_tweet_each_day_for_one_file(input_file, date_array):
+def _get_number_of_tweet_each_day_for_one_file(input_file, date_array, category=None):
     """
     This method calculates the number of tweets for each day within the given date array.
 
@@ -61,10 +65,11 @@ def _get_number_of_tweet_each_day_for_one_file(input_file, date_array):
     :return: An array of integers where each element represents the number of tweets for the corresponding day
     in the date_array.
     """
-    return _get_tweet_count_per_day_for_one_file(input_file, date_array)
+    return _get_tweet_count_per_day_for_one_file(input_file, date_array, category=category)
 
 
-def _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(input_file, dictionary, date_array):
+def _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(input_file, dictionary, date_array,
+                                                                       category=None):
     """
     This function counts the number of tweets per day that contain at least one word from a given dictionary.
 
@@ -79,7 +84,7 @@ def _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(input_fil
     def contains_any_word(text):
         return contains_any_substring(text, dictionary)
 
-    return _get_tweet_count_per_day_for_one_file(input_file, date_array, contains_any_word)
+    return _get_tweet_count_per_day_for_one_file(input_file, date_array, contains_any_word, category=category)
 
 
 def contains_any_substring(text, substring_set):
@@ -102,13 +107,15 @@ def contains_any_substring(text, substring_set):
     return False
 
 
-def dataset_analysis(dictionary, date_array):
+def dataset_analysis(dictionary, date_array, category=None):
     """
     This function aggregates the number of tweets per day that contain at least one word from a given dictionary,
     across multiple datasets.
 
+    :param category: A filter for category of tweet: example RightTroll
     :param dictionary: A set of words to search for within each tweet.
     :param date_array: An array of datetime64 objects representing each day within the desired date range.
+
     :return: An array of integers where each element represents the total number of tweets containing at least one word
              from the dictionary for the corresponding day in the date_array, summed across all datasets.
     """
@@ -122,16 +129,18 @@ def dataset_analysis(dictionary, date_array):
         file_path = PRE_PROCESSED_DATA_PATH.format(i)
 
         # Get the number of tweets per day for the current dataset that contain at least one word from the dictionary
-        nb += _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(file_path, dictionary, date_array)
+        nb += _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(file_path, dictionary, date_array,
+                                                                                 category=category)
 
     # Return the cumulative number of tweets per day across all datasets
     return nb
 
 
-def get_nb_of_tweets_per_day(date_array):
+def get_nb_of_tweets_per_day(date_array, category=None):
     """
     This function calculates the total number of tweets per day across all datasets.
-
+    :param category: A filter for category of tweet: example RightTroll
+    :param category:
     :param date_array: An array of datetime64 objects representing each day within the desired date range.
     :return: An array of integers where each element represents the total number of tweets for the corresponding day
              in the date_array, summed across all datasets.
@@ -146,7 +155,10 @@ def get_nb_of_tweets_per_day(date_array):
         file_path = PRE_PROCESSED_DATA_PATH.format(i)
 
         # Get the total number of tweets per day for the current dataset
-        total_tweets += _get_number_of_tweet_each_day_for_one_file(file_path, date_array)
+        total_tweets += _get_number_of_tweet_each_day_for_one_file(file_path, date_array, category=category)
 
     # Return the cumulative number of tweets per day across all datasets
     return total_tweets
+
+
+
