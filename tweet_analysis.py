@@ -1,9 +1,10 @@
 import numpy as np
 import csv
 import datetime
+from constants import *
 
 
-def get_tweet_count_per_day(input_file, date_array, filter_function=None):
+def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_function=None):
     """
     This function counts the number of tweets per day, optionally applying a filter to each tweet.
 
@@ -51,7 +52,7 @@ def get_tweet_count_per_day(input_file, date_array, filter_function=None):
     return tweet_count_per_day
 
 
-def get_number_of_tweet_each_day(input_file, date_array):
+def _get_number_of_tweet_each_day_for_one_file(input_file, date_array):
     """
     This method calculates the number of tweets for each day within the given date array.
 
@@ -60,10 +61,10 @@ def get_number_of_tweet_each_day(input_file, date_array):
     :return: An array of integers where each element represents the number of tweets for the corresponding day
     in the date_array.
     """
-    return get_tweet_count_per_day(input_file, date_array)
+    return _get_tweet_count_per_day_for_one_file(input_file, date_array)
 
 
-def get_number_of_tweets_per_day_with_at_least_one_word(input_file, dictionary, date_array):
+def _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(input_file, dictionary, date_array):
     """
     This function counts the number of tweets per day that contain at least one word from a given dictionary.
 
@@ -78,7 +79,7 @@ def get_number_of_tweets_per_day_with_at_least_one_word(input_file, dictionary, 
     def contains_any_word(text):
         return contains_any_substring(text, dictionary)
 
-    return get_tweet_count_per_day(input_file, date_array, contains_any_word)
+    return _get_tweet_count_per_day_for_one_file(input_file, date_array, contains_any_word)
 
 
 def contains_any_substring(text, substring_set):
@@ -118,10 +119,34 @@ def dataset_analysis(dictionary, date_array):
     # Loop over the datasets, assuming there are 13 datasets with filenames following a specific pattern
     for i in range(1, 14):
         # Generate the filename for the current dataset
-        file_path = "./data/filtered_data/IRAhandle_tweets_{}.csv".format(i)
+        file_path = PRE_PROCESSED_DATA_PATH.format(i)
 
         # Get the number of tweets per day for the current dataset that contain at least one word from the dictionary
-        nb += get_number_of_tweets_per_day_with_at_least_one_word(file_path, dictionary, date_array)
+        nb += _get_number_of_tweets_per_day_with_at_least_one_word__for_one_file(file_path, dictionary, date_array)
 
     # Return the cumulative number of tweets per day across all datasets
     return nb
+
+
+def get_nb_of_tweets_per_day(date_array):
+    """
+    This function calculates the total number of tweets per day across all datasets.
+
+    :param date_array: An array of datetime64 objects representing each day within the desired date range.
+    :return: An array of integers where each element represents the total number of tweets for the corresponding day
+             in the date_array, summed across all datasets.
+    """
+
+    # Initialize an array to store the cumulative number of tweets per day across all datasets
+    total_tweets = np.zeros(date_array.shape)
+
+    # Loop over the datasets, assuming there are 13 datasets with filenames following a specific pattern
+    for i in range(1, 14):
+        # Generate the filename for the current dataset
+        file_path = PRE_PROCESSED_DATA_PATH.format(i)
+
+        # Get the total number of tweets per day for the current dataset
+        total_tweets += _get_number_of_tweet_each_day_for_one_file(file_path, date_array)
+
+    # Return the cumulative number of tweets per day across all datasets
+    return total_tweets
