@@ -19,8 +19,11 @@ def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_functio
     # Initialize an array to store the number of tweets per day
     tweet_count_per_day = np.zeros(date_array.shape)
 
+
     # Open the input file for reading
     with open(input_file, 'r', newline='', encoding='utf-8') as infile:
+
+
         reader = csv.reader(infile)
 
         # Read the header row to skip it
@@ -28,6 +31,7 @@ def _get_tweet_count_per_day_for_one_file(input_file, date_array, filter_functio
 
         # Process each row in the input file
         for row in reader:
+
             # If a filter function is provided, use it to determine if the tweet should be counted
             if filter_function and not filter_function(row[1]):
                 continue
@@ -124,7 +128,11 @@ def dataset_analysis(dictionary, date_array, category=None):
     nb = np.zeros(date_array.shape)
 
     # Loop over the datasets, assuming there are 13 datasets with filenames following a specific pattern
+    import time
+    t = time.time()
     for i in range(1, 14):
+        print("processing file {}".format(i))
+        print(time.time() - t)
         # Generate the filename for the current dataset
         file_path = PRE_PROCESSED_DATA_PATH.format(i)
 
@@ -150,6 +158,7 @@ def get_nb_of_tweets_per_day(date_array, category=None):
     total_tweets = np.zeros(date_array.shape)
 
     # Loop over the datasets, assuming there are 13 datasets with filenames following a specific pattern
+
     for i in range(1, 14):
         # Generate the filename for the current dataset
         file_path = PRE_PROCESSED_DATA_PATH.format(i)
@@ -159,6 +168,3 @@ def get_nb_of_tweets_per_day(date_array, category=None):
 
     # Return the cumulative number of tweets per day across all datasets
     return total_tweets
-
-
-
