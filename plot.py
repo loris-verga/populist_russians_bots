@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 
 def plot_result(date_array, result, start_date, end_date):
@@ -24,9 +25,12 @@ def plot_result(date_array, result, start_date, end_date):
     data_axis_x = date_array[start_index:end_index + 1]
     data_axis_y = result[start_index:end_index + 1]
 
+
+
     # Plot the data
     plt.plot(data_axis_x, data_axis_y)
     plt.xlabel('Date')
     plt.ylabel('Number of Tweets')
     plt.title('Number of Tweets per Day')
+
     plt.show()

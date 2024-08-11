@@ -1,0 +1,35 @@
+Word,Sub_Type,Type2,Type3
+(a|ä)ngst(e)? (de(s|r)|eine(s|r)|unsere(s|r)) bürger(s|innen|in)?,sorgen der menschen,advocative,people-centrism
+(a|ä)ngst(e)? (de(s|r)|eine(s|r)|unsere(s|r)) deutschen,sorgen der menschen,advocative,people-centrism
+(a|ä)ngst(e)? (de(s|r)|eine(s|r)|unsere(s|r)) österreicher(s|innen|in)?,sorgen der menschen,advocative,people-centrism
+(a|ä)ngst(e)? (de(s|r)|eine(s|r)|unsere(s|r)) schweizer(s|innen|in)?,sorgen der menschen,advocative,people-centrism
+aberwitz(ig(e|er|es|en|em)?)?,zzz_none,conflictive,anti-elitism
+abgehoben(e|er|es|en|em)?,"abgehobene, dreiste eliten",conflictive,anti-elitism
+alt(-)?partei(en)?,zzz_none,conflictive,anti-elitism
+angeblich(e|er|en|em)? (.* )?journalist(en|in|innen)?,pseudo-eliten,conflictive,anti-elitism
+angeblich(e|er|en)? (.*)medien,pseudo-eliten,conflictive,anti-elitism
+angeblich(e|er|en)? (.*)partei(en)?,pseudo-eliten,conflictive,anti-elitism
+anma(ß|ss)end(e|er|es|en|em)?,"abgehobene, dreiste eliten",conflictive,anti-elitism
+anti(-)?demokratisch(e|er|es|en|em)? ,diktatorische eliten,conflictive,anti-elitism
+apparatschik(s)?,zzz_none,conflictive,anti-elitism
+(.*)arbeitend(e|er|en) bevölkerung,arbeitende menschen,advocative,people-centrism
+(.*)arbeitend(e|er|en|em) bürger(s|n|innen|in)?,arbeitende menschen,advocative,people-centrism
+(.*)arbeitend(e|er|en|em) deutsche(n|r)?,arbeitende menschen,advocative,people-centrism
+(.*)arbeitend(e|er|en|em) österreicher(s|n|innen|in)?,arbeitende menschen,advocative,people-centrism
+(.*)arbeitend(e|er|en|em) schweizer(s|n|innen|in)?,arbeitende menschen,advocative,people-centrism
+arrogant(e|er|es|en|em)?,"abgehobene, dreiste eliten",conflictive,anti-elitism
+arroganz,zzz_none,conflictive,anti-elitism
+auf kosten der allgemeinheit,auf kosten der menschen,conflictive,anti-elitism
+auf kosten de(s|r) beschäftigten,auf kosten der menschen,conflictive,anti-elitism
+auf kosten de(s|r) bürger(s|innen|in)?,auf kosten der menschen,conflictive,anti-elitism
+auf kosten de(s|r) deutschen,auf kosten der menschen,conflictive,anti-elitism
+auf kosten de(s|r) österreicher(s|innen|in)?,auf kosten der menschen,conflictive,anti-elitism
+auf kosten de(s|r) schweizer(s|innen|in)?,auf kosten der menschen,conflictive,anti-elitism
+(aus)?verkauf(t|en) (.*)partei(en)?,verabscheuenswerte eliten,conflictive,anti-elitism
+b(a|ä)nk(i)?er(.*),zzz_none,conflictive,anti-elitism
+berufspolitiker(s|n|innen|in)?,zzz_none,conflictive,anti-elitism
+bevölkerung (.* )?wei(ß|ss),common sense,advocative,people-centrism
+bonze(.*),zzz_none,conflictive,anti-elitism
+bürger(innen|in)? (.* )?(die nase|die schnauze|satt|genug|dicke)( .*)? (haben|hat),menschen reicht es,advocative,people-centrism
+bürger(innen|in)? (haben|hat) (.* )?(die nase|die schnauze|satt|genug|dicke),menschen reicht es,advocative,people-centrism
+bürger(innen|in)? (.* )?versteh(t|en),common sense,advocative,people-centrism
