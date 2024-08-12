@@ -3,14 +3,19 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 
-def plot_result(date_array, result, start_date, end_date):
+def plot_result(date_array, result, start_date, end_date,
+                ylabel ="Number of Tweets",
+                title = "Number of Tweets per Day"):
     """
     This function plots the results (e.g., the number of tweets per day) within a specified date range.
+
 
     :param date_array: An array of datetime64 objects representing a continuous range of dates.
     :param result: An array of integers representing the data to be plotted, corresponding to each date in the date_array.
     :param start_date: The start date for the plot (inclusive).
     :param end_date: The end date for the plot (inclusive).
+    :param ylabel: The name of the label of the y-axis.
+    :param title: The title of the plot.
     """
 
     # Convert the start and end dates to numpy datetime64 objects
@@ -30,7 +35,7 @@ def plot_result(date_array, result, start_date, end_date):
     # Plot the data
     plt.plot(data_axis_x, data_axis_y)
     plt.xlabel('Date')
-    plt.ylabel('Number of Tweets')
-    plt.title('Number of Tweets per Day')
+    plt.ylabel(ylabel)
+    plt.title(title)
 
     plt.show()
